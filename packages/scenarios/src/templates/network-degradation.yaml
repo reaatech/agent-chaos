@@ -1,0 +1,71 @@
+# -----------------------------------------------------------
+# Network Degradation Scenario
+# Simulates various network-related failures for testing agent resilience.
+# -----------------------------------------------------------
+
+name: Network Degradation Scenario
+description: Simulates various network-related failures for testing agent resilience
+version: '1.0.0'
+
+# Global defaults applied to all faults that do not specify their own value.
+defaults:
+  probability: 0.1 # 10% chance per fault (0.0 = never, 1.0 = always)
+
+# Each target matches tool calls by selector pattern (glob/wildcard).
+# When a child scenario extends this one and specifies the same selector,
+# the child's target completely replaces the parent's target for that selector.
+targets:
+  - selector: '*' # Applies to ALL tools
+    faults:
+      # Artificial delays with exponential distribution (more small values, occasional spikes).
+      - type: latency
+        config:
+          minDelay: 1000 # Minimum delay in milliseconds
+          maxDelay: 30000 # Maximum delay in milliseconds
+          distribution: exponential # skews toward faster responses with tail latency
+        probability: 0.15
+
+      # Hard timeout errors (tool never returns).
+      - type: timeout
+        config:
+          timeout: 5000 # Reported timeout duration in ms
+        probability: 0.05
+
+      # Rate limit (HTTP 429) responses with optional headers.
+      - type: rateLimit
+        config:
+          retryAfter: 60 # Seconds before client should retry
+          includeHeaders: true # Include Retry-After and X-RateLimit-* headers
+        probability: 0.05
+
+# Overrides are secondary targets that add additional faults for specific tools.
+# Unlike targets, overrides ADD to the faults list rather than replacing.
+# Priority field controls evaluation order (higher = first, default 100).
+overrides:
+  - selector: 'webSearch'
+    faults:
+      - type: malformedOutput
+        config:
+          patterns:
+            - truncated # Incomplete JSON/response
+            - invalidJson # Unparseable JSON
+            - missingFields # Required fields omitted
+        probability: 0.1
+
+  - selector: 'database.*'
+    faults:
+      - type: partialFailure
+        config:
+          failureRate: 0.3 # 30% of data unavailable
+          errorTypes:
+            - connectionRefused # DB connection dropped
+            - queryTimeout # Query exceeded deadline
+          degradedResult: true # Return partial data with error
+
+metadata:
+  author: agent-chaos
+  tags:
+    - network
+    - degradation
+    - testing
+  createdAt: '2026-04-21T00:00:00.000Z'

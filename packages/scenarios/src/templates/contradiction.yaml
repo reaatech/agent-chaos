@@ -1,0 +1,59 @@
+# -----------------------------------------------------------
+# Contradictory World Scenario
+# Tools return conflicting information to test agent conflict resolution.
+# Use to test: cross-referencing, conflict detection, confidence gates.
+#
+# Each conflict specifies a field name and a list of possible contradictory values.
+# The injector randomly selects one value from each conflict's values array.
+# -----------------------------------------------------------
+
+name: Contradictory World Scenario
+description: Tools return conflicting information to test agent conflict resolution
+version: '1.0.0'
+
+targets:
+  - selector: 'weather.*'
+    faults:
+      - type: contradiction
+        config:
+          conflicts:
+            # Temperature (F) is reported as wildly different values.
+            - field: temperature
+              values: [72, 45, 98, 32]
+            # Conditions are contradictory (sunny AND snowy).
+            - field: conditions
+              values: ['sunny', 'rainy', 'snowy', 'foggy']
+            # Humidity spans the full 0-100% range.
+            - field: humidity
+              values: [30, 85, 60, 100]
+        probability: 0.5
+
+  - selector: 'stock.*'
+    faults:
+      - type: contradiction
+        config:
+          conflicts:
+            # Stock price reported at different levels simultaneously.
+            - field: price
+              values: [150.5, 145.2, 160.0]
+            # Price change direction conflicts (up, down, flat).
+            - field: change
+              values: ['+2.5%', '-1.2%', '+0.0%']
+        probability: 0.4
+
+  - selector: 'database.*'
+    faults:
+      - type: contradiction
+        config:
+          conflicts:
+            # Record count is both 100, 0, and 999.
+            - field: count
+              values: [100, 0, 999]
+        probability: 0.3
+
+metadata:
+  author: agent-chaos
+  tags:
+    - contradiction
+    - conflict
+    - resolution

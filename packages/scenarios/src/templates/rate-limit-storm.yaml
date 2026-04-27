@@ -1,0 +1,56 @@
+# -----------------------------------------------------------
+# Rate Limit Storm Scenario
+# Simulates aggressive rate limiting across all tools at multiple levels.
+# Use to test: backoff strategies, retry logic, queue management.
+# -----------------------------------------------------------
+
+name: Rate Limit Storm Scenario
+description: Simulates aggressive rate limiting across all tools
+version: '1.0.0'
+
+# Global probability applies to faults that do not specify their own.
+defaults:
+  probability: 0.4
+
+targets:
+  - selector: '*'
+    faults:
+      # Short retry (1s) — 50% chance. Tests fast backoff.
+      - type: rateLimit
+        config:
+          retryAfter: 1
+          includeHeaders: true
+        probability: 0.5
+
+      # Long retry (60s) — 30% chance. Tests patience/fallback.
+      - type: rateLimit
+        config:
+          retryAfter: 60
+          includeHeaders: true
+        probability: 0.3
+
+      # Burst latency — 20% chance. Most calls return at min delay with spikes.
+      - type: latency
+        config:
+          minDelay: 500
+          maxDelay: 2000
+          distribution: burst # 80% at min, 20% uniform in [min, max]
+        probability: 0.2
+
+# API-namespaced tools get an even more aggressive rate limit override.
+overrides:
+  - selector: 'api.*'
+    faults:
+      - type: rateLimit
+        config:
+          retryAfter: 300
+          message: 'API quota exceeded. Try again later.'
+          includeHeaders: true
+        probability: 0.6
+
+metadata:
+  author: agent-chaos
+  tags:
+    - rate-limit
+    - storm
+    - aggressive

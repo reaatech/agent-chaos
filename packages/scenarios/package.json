@@ -1,0 +1,69 @@
+{
+  "name": "@agent-chaos/scenarios",
+  "version": "0.1.0",
+  "description": "Scenario loader and validator for agent-chaos",
+  "license": "MIT",
+  "author": "Rick Somers <rick@reaatech.com> (https://reaatech.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reaatech/agent-chaos.git",
+    "directory": "packages/scenarios"
+  },
+  "homepage": "https://github.com/reaatech/agent-chaos#readme",
+  "bugs": {
+    "url": "https://github.com/reaatech/agent-chaos/issues"
+  },
+  "keywords": [
+    "chaos",
+    "chaos-engineering",
+    "fault-injection",
+    "scenarios",
+    "yaml",
+    "agent"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./templates/*": "./src/templates/*"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prepublishOnly": "pnpm build",
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --shims --clean && node -e \"require('fs').cpSync('src/schemas', 'dist/schemas', {recursive:true})\"",
+    "build:watch": "tsup src/index.ts --format esm,cjs --dts --sourcemap --shims --watch",
+    "dev": "pnpm build:watch",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "eslint src/**/*.ts --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agent-chaos/core": "workspace:*",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "yaml": "^2.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@vitest/coverage-v8": "^1.6.1",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  }
+}

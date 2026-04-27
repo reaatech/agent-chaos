@@ -1,0 +1,32 @@
+# -----------------------------------------------------------
+# Provider Outage Scenario
+# Simulates complete provider unavailability across all tools.
+# Use to test: circuit breakers, fallback trees, graceful degradation.
+# -----------------------------------------------------------
+
+name: Provider Outage Scenario
+description: Simulates complete provider unavailability
+version: '1.0.0'
+
+targets:
+  - selector: '*'
+    faults:
+      # 50% of all tool calls timeout (simulating a dead provider).
+      - type: timeout
+        config:
+          timeout: 1000
+        probability: 0.5
+
+      # 30% of all tool calls hit a rate limit (simulating throttling).
+      - type: rateLimit
+        config:
+          retryAfter: 300 # Retry delay in seconds
+          message: 'Service temporarily unavailable. Please try again later.'
+        probability: 0.3
+
+metadata:
+  author: agent-chaos
+  tags:
+    - outage
+    - provider
+    - critical

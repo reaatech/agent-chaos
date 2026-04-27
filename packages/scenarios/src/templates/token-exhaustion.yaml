@@ -1,0 +1,38 @@
+# -----------------------------------------------------------
+# Token Exhaustion Scenario
+# Simulates context window and token limit issues.
+# Use to test: context window management, summarization, chunking strategies.
+#
+# NOTE: tokenLimit faults track per-tool call counts internally.
+# triggerAfter controls how many calls before the fault activates.
+# -----------------------------------------------------------
+
+name: Token Exhaustion Scenario
+description: Simulates context window and token limit issues
+version: '1.0.0'
+
+targets:
+  - selector: '*'
+    faults:
+      # Triggers after 5 tool calls, reporting 100 tokens remaining out of 4096.
+      - type: tokenLimit
+        config:
+          triggerAfter: 5 # Activate on the 5th call
+          remainingTokens: 100 # Tokens left in the window
+          maxTokens: 4096 # Total context window size
+          includeSuggestions: true # Include mitigation tips in error details
+        probability: 0.2
+
+      # Stale context: responses appear successful but are from an earlier time.
+      - type: staleContext
+        config:
+          stalenessSeconds: 3600 # Data appears 1 hour old
+          markAsFresh: false # The response is NOT marked as fresh
+        probability: 0.1
+
+metadata:
+  author: agent-chaos
+  tags:
+    - tokens
+    - context
+    - limits
