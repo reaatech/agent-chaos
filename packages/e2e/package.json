@@ -1,0 +1,36 @@
+{
+  "name": "@agent-chaos/e2e",
+  "version": "0.1.0",
+  "description": "End-to-end tests for agent-chaos",
+  "license": "MIT",
+  "author": "Rick Somers <rick@reaatech.com> (https://reaatech.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reaatech/agent-chaos.git",
+    "directory": "packages/e2e"
+  },
+  "homepage": "https://github.com/reaatech/agent-chaos#readme",
+  "bugs": {
+    "url": "https://github.com/reaatech/agent-chaos/issues"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --clean",
+    "build:watch": "tsup src/index.ts --format esm,cjs --dts --sourcemap --watch",
+    "dev": "pnpm build:watch",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "eslint src/**/*.ts --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agent-chaos/core": "workspace:*",
+    "@agent-chaos/adapters": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  }
+}
