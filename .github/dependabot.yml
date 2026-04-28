@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-minor'
     commit-message:
       prefix: 'chore'
       prefix-development: 'chore'
@@ -19,6 +23,10 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'monday'
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-minor'
     commit-message:
       prefix: 'ci'
       include: 'scope'
