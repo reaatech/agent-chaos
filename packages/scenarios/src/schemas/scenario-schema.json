@@ -165,7 +165,13 @@
                             "type": "array",
                             "items": {
                               "type": "string",
-                              "enum": ["truncated", "invalidJson", "missingFields", "wrongType", "extraFields"]
+                              "enum": [
+                                "truncated",
+                                "invalidJson",
+                                "missingFields",
+                                "wrongType",
+                                "extraFields"
+                              ]
                             }
                           },
                           "severity": {

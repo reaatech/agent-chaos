@@ -23,11 +23,7 @@ export interface ToolError {
 }
 
 export interface ChaosEvent {
-  type:
-    | 'fault_injected'
-    | 'tool_called'
-    | 'scenario_loaded'
-    | 'scenario_unloaded';
+  type: 'fault_injected' | 'tool_called' | 'scenario_loaded' | 'scenario_unloaded';
   timestamp: number;
   data: Record<string, unknown>;
 }
