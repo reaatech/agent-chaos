@@ -55,15 +55,15 @@
   },
   "dependencies": {
     "@agent-chaos/core": "workspace:*",
-    "ajv": "^8.12.0",
-    "ajv-formats": "^2.1.1",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@vitest/coverage-v8": "^1.6.1",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.5",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vitest": "^1.1.0"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }
