@@ -13,6 +13,7 @@
       "cache": true
     },
     "lint": {
+      "dependsOn": ["^build"],
       "outputs": [],
       "cache": true
     },

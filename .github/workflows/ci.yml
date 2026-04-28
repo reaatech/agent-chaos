@@ -24,9 +24,9 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm format:check
+      - run: pnpm build
       - run: pnpm lint
       - run: pnpm type-check
-      - run: pnpm build
       - run: pnpm test
 
   publish:
