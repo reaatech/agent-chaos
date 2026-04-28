@@ -40,7 +40,10 @@ metadata:
   const samplePath = path.join(scenariosDir, 'hello-world.yaml');
 
   try {
-    const exists = await fs.access(samplePath).then(() => true, () => false);
+    const exists = await fs.access(samplePath).then(
+      () => true,
+      () => false
+    );
     if (exists) {
       console.log(chalk.yellow('!'), `Scenario already exists, skipping: ${samplePath}`);
       return;

@@ -53,16 +53,16 @@ You've built circuit breakers, confidence gates, and fallback trees — Agent Ch
 
 ## Fault Injection Types
 
-| Fault                         | Description                                   | Tests                                          |
-| ----------------------------- | --------------------------------------------- | ---------------------------------------------- |
-| **Latency Spikes**            | Inject random delays in tool responses        | Timeout handling, UX degradation               |
-| **Timeouts**                  | Simulate complete provider unavailability     | Circuit breaker activation                     |
-| **Rate Limits**               | Return 429 responses with retry headers       | Retry logic, backoff strategies                |
-| **Malformed Output**          | Return invalid/unexpected JSON                | Input validation, error recovery               |
-| **Token Limit Exceeded**      | Simulate context window exhaustion            | Token management, summarization fallbacks      |
-| **Stale Context**             | Return outdated/cached responses              | Cache invalidation, freshness checks           |
-| **Contradictory Results**     | Return conflicting information across tools   | Conflict resolution, confidence scoring        |
-| **Partial Failures**          | Selectively fail some tools while others work | Graceful degradation, fallback tree validation |
+| Fault                     | Description                                   | Tests                                          |
+| ------------------------- | --------------------------------------------- | ---------------------------------------------- |
+| **Latency Spikes**        | Inject random delays in tool responses        | Timeout handling, UX degradation               |
+| **Timeouts**              | Simulate complete provider unavailability     | Circuit breaker activation                     |
+| **Rate Limits**           | Return 429 responses with retry headers       | Retry logic, backoff strategies                |
+| **Malformed Output**      | Return invalid/unexpected JSON                | Input validation, error recovery               |
+| **Token Limit Exceeded**  | Simulate context window exhaustion            | Token management, summarization fallbacks      |
+| **Stale Context**         | Return outdated/cached responses              | Cache invalidation, freshness checks           |
+| **Contradictory Results** | Return conflicting information across tools   | Conflict resolution, confidence scoring        |
+| **Partial Failures**      | Selectively fail some tools while others work | Graceful degradation, fallback tree validation |
 
 ---
 
@@ -162,11 +162,11 @@ overrides:
 
 ## Packages
 
-| Package                      | Description                                       | Status        |
-| ---------------------------- | ------------------------------------------------- | ------------- |
-| `@agent-chaos/core`          | Fault injection engine, middleware, and injectors | Published     |
-| `@agent-chaos/scenarios`     | Scenario loader, validator, and templates         | Published     |
-| `@agent-chaos/cli`           | Command-line interface                            | Published     |
+| Package                      | Description                                       | Status         |
+| ---------------------------- | ------------------------------------------------- | -------------- |
+| `@agent-chaos/core`          | Fault injection engine, middleware, and injectors | Published      |
+| `@agent-chaos/scenarios`     | Scenario loader, validator, and templates         | Published      |
+| `@agent-chaos/cli`           | Command-line interface                            | Published      |
 | `@agent-chaos/adapters`      | LangChain, LlamaIndex, and Vercel AI SDK adapters | Planned (v0.2) |
 | `@agent-chaos/observability` | Metrics, structured logging, and OpenTelemetry    | Planned (v0.2) |
 
@@ -209,14 +209,14 @@ overrides:
 
 ## Documentation
 
-| Document                                       | Description                            |
-| ---------------------------------------------- | -------------------------------------- |
-| [Development Plan](./DEV_PLAN.md)              | Full product roadmap and architecture  |
-| [Agent Skills](./AGENTS.md)                    | AI agent skills for project development |
-| [Contributing Guidelines](./CONTRIBUTING.md)   | How to contribute to the project       |
-| [Code of Conduct](./CODE_OF_CONDUCT.md)        | Community standards                    |
-| [Security Policy](./SECURITY.md)               | Vulnerability reporting                |
-| [Examples](./examples/)                        | Usage examples and integrations        |
+| Document                                     | Description                             |
+| -------------------------------------------- | --------------------------------------- |
+| [Development Plan](./DEV_PLAN.md)            | Full product roadmap and architecture   |
+| [Agent Skills](./AGENTS.md)                  | AI agent skills for project development |
+| [Contributing Guidelines](./CONTRIBUTING.md) | How to contribute to the project        |
+| [Code of Conduct](./CODE_OF_CONDUCT.md)      | Community standards                     |
+| [Security Policy](./SECURITY.md)             | Vulnerability reporting                 |
+| [Examples](./examples/)                      | Usage examples and integrations         |
 
 ---
 
@@ -238,30 +238,30 @@ pnpm build
 
 ### Commands
 
-| Command              | Description                       |
-| -------------------- | --------------------------------- |
-| `pnpm build`         | Build all packages                |
-| `pnpm test`          | Run the full test suite           |
-| `pnpm lint`          | Lint all packages                 |
-| `pnpm type-check`    | Run TypeScript type checking      |
-| `pnpm format`        | Format code with Prettier         |
-| `pnpm check`         | Run lint, type-check, and tests   |
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `pnpm build`      | Build all packages              |
+| `pnpm test`       | Run the full test suite         |
+| `pnpm lint`       | Lint all packages               |
+| `pnpm type-check` | Run TypeScript type checking    |
+| `pnpm format`     | Format code with Prettier       |
+| `pnpm check`      | Run lint, type-check, and tests |
 
 ---
 
 ## Technology Stack
 
-| Category              | Technology                |
-| --------------------- | ------------------------- |
-| **Runtime**           | Node.js 20+ LTS           |
-| **Language**          | TypeScript 5.3+ (strict)  |
-| **Package Manager**   | pnpm 9+                   |
-| **Monorepo**          | Turborepo                 |
-| **Build**             | tsup                      |
-| **Testing**           | Vitest                    |
-| **Linting**           | ESLint + Prettier         |
-| **CI/CD**             | GitHub Actions            |
-| **Commit Convention** | Conventional Commits      |
+| Category              | Technology               |
+| --------------------- | ------------------------ |
+| **Runtime**           | Node.js 20+ LTS          |
+| **Language**          | TypeScript 5.3+ (strict) |
+| **Package Manager**   | pnpm 9+                  |
+| **Monorepo**          | Turborepo                |
+| **Build**             | tsup                     |
+| **Testing**           | Vitest                   |
+| **Linting**           | ESLint + Prettier        |
+| **CI/CD**             | GitHub Actions           |
+| **Commit Convention** | Conventional Commits     |
 
 ---
 

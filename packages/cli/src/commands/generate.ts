@@ -14,9 +14,7 @@ const TEMPLATES = [
 
 function resolveTemplateDir(): string {
   const require = createRequire(import.meta.url);
-  return path.dirname(
-    require.resolve('@agent-chaos/scenarios/templates/network-degradation.yaml')
-  );
+  return path.dirname(require.resolve('@agent-chaos/scenarios/templates/network-degradation.yaml'));
 }
 
 export async function generateCommand(type: string, options: { output?: string }): Promise<void> {
