@@ -1,9 +1,9 @@
 import type { TimeoutConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolError,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
@@ -26,12 +26,16 @@ export class TimeoutInjector implements Injector {
     if (fault.type !== 'timeout') return false;
 
     if (!this.isValidConfig(fault.config)) {
-      this.logger.warn('Invalid timeout configuration', { config: fault.config });
+      this.logger.warn('Invalid timeout configuration', {
+        config: fault.config,
+      });
       return false;
     }
 
     if (fault.config.timeout < 0) {
-      this.logger.warn('Invalid timeout configuration', { config: fault.config });
+      this.logger.warn('Invalid timeout configuration', {
+        config: fault.config,
+      });
       return false;
     }
     return true;

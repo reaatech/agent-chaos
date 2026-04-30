@@ -2,7 +2,7 @@ import * as fs from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { generateCommand } from './generate.js';
 
@@ -29,7 +29,7 @@ describe('generateCommand', () => {
 
   it('should throw for an unknown template', async () => {
     await expect(generateCommand('unknown-template', { output: tmpDir })).rejects.toThrow(
-      'Unknown template type'
+      'Unknown template type',
     );
   });
 });

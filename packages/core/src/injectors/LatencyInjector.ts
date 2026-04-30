@@ -1,7 +1,7 @@
 import type { LatencyConfig } from '../types/faults.js';
-import type { FaultConfig, Injector, InjectionContext, InjectionResult } from '../types/index.js';
-import { sampleDistribution, type DistributionType } from '../utils/distributions.js';
+import type { FaultConfig, InjectionContext, InjectionResult, Injector } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
+import { type DistributionType, sampleDistribution } from '../utils/distributions.js';
 
 export type { LatencyConfig };
 
@@ -26,17 +26,23 @@ export class LatencyInjector implements Injector {
     if (fault.type !== 'latency') return false;
 
     if (!this.isValidConfig(fault.config)) {
-      this.logger.warn('Invalid latency configuration', { config: fault.config });
+      this.logger.warn('Invalid latency configuration', {
+        config: fault.config,
+      });
       return false;
     }
 
     if (fault.config.minDelay < 0 || fault.config.maxDelay < 0) {
-      this.logger.warn('Negative delay values not allowed', { config: fault.config });
+      this.logger.warn('Negative delay values not allowed', {
+        config: fault.config,
+      });
       return false;
     }
 
     if (fault.config.minDelay > fault.config.maxDelay) {
-      this.logger.warn('minDelay cannot be greater than maxDelay', { config: fault.config });
+      this.logger.warn('minDelay cannot be greater than maxDelay', {
+        config: fault.config,
+      });
       return false;
     }
 
@@ -68,7 +74,7 @@ export class LatencyInjector implements Injector {
         min: minDelay,
         max: maxDelay,
       },
-      context.randomSource
+      context.randomSource,
     );
   }
 

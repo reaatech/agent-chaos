@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -8,7 +8,12 @@ import { TokenLimitInjector } from './TokenLimitInjector.js';
 describe('TokenLimitInjector', () => {
   const injector = new TokenLimitInjector();
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],
@@ -17,17 +22,26 @@ describe('TokenLimitInjector', () => {
 
   describe('canInject', () => {
     it('should return true for valid config', () => {
-      const fault: FaultConfig = { type: 'tokenLimit', config: { maxTokens: 4096 } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { maxTokens: 4096 },
+      };
       expect(injector.canInject(fault, context)).toBe(true);
     });
 
     it('should return false for negative maxTokens', () => {
-      const fault: FaultConfig = { type: 'tokenLimit', config: { maxTokens: -1 } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { maxTokens: -1 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
 
     it('should return false for negative remainingTokens', () => {
-      const fault: FaultConfig = { type: 'tokenLimit', config: { remainingTokens: -1 } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { remainingTokens: -1 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
   });
@@ -35,7 +49,10 @@ describe('TokenLimitInjector', () => {
   describe('inject', () => {
     it('should not inject before triggerAfter', async () => {
       const inj = new TokenLimitInjector();
-      const fault: FaultConfig = { type: 'tokenLimit', config: { triggerAfter: 3 } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { triggerAfter: 3 },
+      };
 
       const r1 = await inj.inject(fault, context);
       expect(r1.shouldInject).toBe(false);
@@ -59,7 +76,10 @@ describe('TokenLimitInjector', () => {
     });
 
     it('should include suggestions when configured', async () => {
-      const fault: FaultConfig = { type: 'tokenLimit', config: { includeSuggestions: true } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { includeSuggestions: true },
+      };
       const result = await injector.inject(fault, context);
 
       const details = result.mockResponse?.error?.details as Record<string, unknown>;
@@ -70,7 +90,10 @@ describe('TokenLimitInjector', () => {
   describe('resetCallCount', () => {
     it('should reset call counts', async () => {
       const inj = new TokenLimitInjector();
-      const fault: FaultConfig = { type: 'tokenLimit', config: { triggerAfter: 2 } };
+      const fault: FaultConfig = {
+        type: 'tokenLimit',
+        config: { triggerAfter: 2 },
+      };
 
       await inj.inject(fault, context);
       await inj.inject(fault, context);

@@ -1,6 +1,6 @@
 import type { RandomSource } from '../utils/RandomSource.js';
 
-import type { ToolCall, ToolResponse, ToolError } from './events.js';
+import type { ToolCall, ToolError, ToolResponse } from './events.js';
 import type { FaultConfig, Scenario } from './scenario.js';
 
 export interface Injector {

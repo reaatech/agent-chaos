@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -8,7 +8,12 @@ import { MalformedOutputInjector } from './MalformedOutputInjector.js';
 describe('MalformedOutputInjector', () => {
   const injector = new MalformedOutputInjector();
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],
@@ -17,7 +22,10 @@ describe('MalformedOutputInjector', () => {
 
   describe('canInject', () => {
     it('should return true for valid config', () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: ['truncated'] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: ['truncated'] },
+      };
       expect(injector.canInject(fault, context)).toBe(true);
     });
 
@@ -27,14 +35,20 @@ describe('MalformedOutputInjector', () => {
     });
 
     it('should return false for empty patterns array', () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: [] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: [] },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
   });
 
   describe('inject', () => {
     it('should inject truncated output', async () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: ['truncated'] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: ['truncated'] },
+      };
       const result = await injector.inject(fault, context);
 
       expect(result.shouldInject).toBe(true);
@@ -47,7 +61,10 @@ describe('MalformedOutputInjector', () => {
     });
 
     it('should inject invalid json', async () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: ['invalidJson'] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: ['invalidJson'] },
+      };
       const result = await injector.inject(fault, context);
 
       expect(result.shouldInject).toBe(true);
@@ -71,7 +88,10 @@ describe('MalformedOutputInjector', () => {
     });
 
     it('should inject wrong type', async () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: ['wrongType'] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: ['wrongType'] },
+      };
       const result = await injector.inject(fault, context);
 
       expect(result.shouldInject).toBe(true);
@@ -81,12 +101,15 @@ describe('MalformedOutputInjector', () => {
           typeof r === 'number' ||
           typeof r === 'boolean' ||
           typeof r === 'string' ||
-          Array.isArray(r)
+          Array.isArray(r),
       ).toBe(true);
     });
 
     it('should inject extra fields', async () => {
-      const fault: FaultConfig = { type: 'malformedOutput', config: { patterns: ['extraFields'] } };
+      const fault: FaultConfig = {
+        type: 'malformedOutput',
+        config: { patterns: ['extraFields'] },
+      };
       const result = await injector.inject(fault, context);
 
       expect(result.shouldInject).toBe(true);

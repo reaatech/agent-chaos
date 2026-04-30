@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -8,7 +8,12 @@ import { TimeoutInjector } from './TimeoutInjector.js';
 describe('TimeoutInjector', () => {
   const injector = new TimeoutInjector();
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],

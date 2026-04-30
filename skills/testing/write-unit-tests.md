@@ -241,18 +241,18 @@ export default defineConfig({
     deps: {
       optimizer: {
         web: {
-          include: ['@agent-chaos/core'],
+          include: ['@reaatech/agent-chaos-core'],
         },
       },
     },
   },
   resolve: {
     alias: {
-      '@agent-chaos/core': resolve(__dirname, 'packages/core/src'),
-      '@agent-chaos/scenarios': resolve(__dirname, 'packages/scenarios/src'),
-      '@agent-chaos/cli': resolve(__dirname, 'packages/cli/src'),
-      '@agent-chaos/adapters': resolve(__dirname, 'packages/adapters/src'),
-      '@agent-chaos/observability': resolve(__dirname, 'packages/observability/src'),
+      '@reaatech/agent-chaos-core': resolve(__dirname, 'packages/core/src'),
+      '@reaatech/agent-chaos-scenarios': resolve(__dirname, 'packages/scenarios/src'),
+      '@reaatech/agent-chaos-cli': resolve(__dirname, 'packages/cli/src'),
+      '@reaatech/agent-chaos-adapters': resolve(__dirname, 'packages/adapters/src'),
+      '@reaatech/agent-chaos-observability': resolve(__dirname, 'packages/observability/src'),
     },
   },
 });

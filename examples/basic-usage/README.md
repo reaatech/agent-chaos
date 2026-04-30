@@ -1,6 +1,6 @@
 # Basic Usage Example
 
-This example demonstrates how to use `@agent-chaos/core` to inject latency faults into tool calls.
+This example demonstrates how to use `@reaatech/agent-chaos-core` to inject latency faults into tool calls.
 
 ## Running
 

@@ -1,7 +1,7 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 
-import { SchemaValidator } from '@agent-chaos/scenarios';
+import { SchemaValidator } from '@reaatech/agent-chaos-scenarios';
 import chalk from 'chalk';
 
 export async function validateCommand(filePath: string): Promise<void> {

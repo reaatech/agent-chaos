@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import type { FaultCondition } from '../types/index.js';
 
@@ -21,7 +21,10 @@ describe('TemporalScheduler', () => {
         },
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(true);
     });
 
@@ -37,7 +40,10 @@ describe('TemporalScheduler', () => {
         },
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(false);
     });
   });
@@ -49,10 +55,18 @@ describe('TemporalScheduler', () => {
         config: { minCalls: 2, maxCalls: 5 },
       };
 
-      expect(scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 1 })).toBe(
-        false
-      );
-      expect(scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 3 })).toBe(true);
+      expect(
+        scheduler.evaluateCondition(condition, {
+          toolName: 'test',
+          callCount: 1,
+        }),
+      ).toBe(false);
+      expect(
+        scheduler.evaluateCondition(condition, {
+          toolName: 'test',
+          callCount: 3,
+        }),
+      ).toBe(true);
     });
   });
 
@@ -66,7 +80,10 @@ describe('TemporalScheduler', () => {
       scheduler.recordCall('test', true);
       scheduler.recordCall('test', false);
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 2 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 2,
+      });
       expect(result).toBe(true);
     });
 
@@ -76,7 +93,10 @@ describe('TemporalScheduler', () => {
         config: { minRate: 0, maxRate: 0.5 },
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(true);
     });
   });
@@ -92,9 +112,12 @@ describe('TemporalScheduler', () => {
         config: { minRate: 0.25, maxRate: 0.5 },
       };
 
-      expect(scheduler.evaluateCondition(condition, { toolName: 'tool1', callCount: 3 })).toBe(
-        true
-      );
+      expect(
+        scheduler.evaluateCondition(condition, {
+          toolName: 'tool1',
+          callCount: 3,
+        }),
+      ).toBe(true);
     });
   });
 
@@ -108,9 +131,12 @@ describe('TemporalScheduler', () => {
         config: { minRate: 0.1, maxRate: 1 },
       };
 
-      expect(scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 })).toBe(
-        false
-      );
+      expect(
+        scheduler.evaluateCondition(condition, {
+          toolName: 'test',
+          callCount: 0,
+        }),
+      ).toBe(false);
     });
   });
 
@@ -127,7 +153,10 @@ describe('TemporalScheduler', () => {
         type: 'timeWindow',
         config: { startHour: 22, endHour: 6 },
       };
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(isInRange);
     });
   });
@@ -145,7 +174,10 @@ describe('TemporalScheduler', () => {
         },
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(false);
     });
 
@@ -160,7 +192,10 @@ describe('TemporalScheduler', () => {
         },
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(true);
     });
   });
@@ -172,7 +207,10 @@ describe('TemporalScheduler', () => {
         config: {},
       };
 
-      const result = scheduler.evaluateCondition(condition, { toolName: 'test', callCount: 0 });
+      const result = scheduler.evaluateCondition(condition, {
+        toolName: 'test',
+        callCount: 0,
+      });
       expect(result).toBe(false);
     });
   });

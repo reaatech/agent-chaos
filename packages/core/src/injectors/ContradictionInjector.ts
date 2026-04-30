@@ -1,9 +1,9 @@
 import type { ContradictionConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';

@@ -1,26 +1,19 @@
 {
-  "name": "@agent-chaos/scenarios",
+  "name": "@reaatech/agent-chaos-scenarios",
   "version": "0.1.0",
   "description": "Scenario loader and validator for agent-chaos",
   "license": "MIT",
   "author": "Rick Somers <rick@reaatech.com> (https://reaatech.com)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reaatech/agent-chaos.git",
+    "url": "https://github.com/reaatech/agent-chaos.git",
     "directory": "packages/scenarios"
   },
-  "homepage": "https://github.com/reaatech/agent-chaos#readme",
+  "homepage": "https://github.com/reaatech/agent-chaos/tree/main/packages/scenarios#readme",
   "bugs": {
     "url": "https://github.com/reaatech/agent-chaos/issues"
   },
-  "keywords": [
-    "chaos",
-    "chaos-engineering",
-    "fault-injection",
-    "scenarios",
-    "yaml",
-    "agent"
-  ],
+  "keywords": ["chaos", "chaos-engineering", "fault-injection", "scenarios", "yaml", "agent"],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -28,7 +21,8 @@
     "access": "public"
   },
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -39,10 +33,7 @@
     "./package.json": "./package.json",
     "./templates/*": "./src/templates/*"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist"],
   "scripts": {
     "prepublishOnly": "pnpm build",
     "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --shims --clean && node -e \"require('fs').cpSync('src/schemas', 'dist/schemas', {recursive:true})\"",
@@ -50,20 +41,19 @@
     "dev": "pnpm build:watch",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
-    "lint": "eslint src/**/*.ts --fix",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@agent-chaos/core": "workspace:*",
+    "@reaatech/agent-chaos-core": "workspace:*",
     "ajv": "^8.20.0",
     "ajv-formats": "^2.1.1",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "@vitest/coverage-v8": "^1.6.1",
+    "@vitest/coverage-v8": "^3.2.4",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vitest": "^1.1.0"
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
   }
 }

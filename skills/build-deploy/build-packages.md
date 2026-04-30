@@ -86,7 +86,7 @@ Please execute the "build-packages" skill with:
 
 ```json
 {
-  "name": "@agent-chaos/core",
+  "name": "@reaatech/agent-chaos-core",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",

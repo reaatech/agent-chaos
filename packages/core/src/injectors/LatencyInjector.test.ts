@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -18,7 +18,12 @@ describe('LatencyInjector', () => {
   });
 
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],
@@ -27,7 +32,10 @@ describe('LatencyInjector', () => {
 
   describe('canInject', () => {
     it('should return true for valid config', () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: 100, maxDelay: 200 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: 100, maxDelay: 200 },
+      };
       expect(injector.canInject(fault, context)).toBe(true);
     });
 
@@ -48,24 +56,36 @@ describe('LatencyInjector', () => {
     });
 
     it('should return false when both delays are negative', () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: -1, maxDelay: -1 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: -1, maxDelay: -1 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
 
     it('should return false for negative delay', () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: -1, maxDelay: 200 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: -1, maxDelay: 200 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
 
     it('should return false when minDelay > maxDelay', () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: 200, maxDelay: 100 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: 200, maxDelay: 100 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
   });
 
   describe('inject', () => {
     it('should inject delay within bounds', async () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: 50, maxDelay: 100 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: 50, maxDelay: 100 },
+      };
       const promise = injector.inject(fault, context);
       vi.advanceTimersByTime(100);
       const result = await promise;
@@ -74,7 +94,10 @@ describe('LatencyInjector', () => {
     });
 
     it('should respect zero delay', async () => {
-      const fault: FaultConfig = { type: 'latency', config: { minDelay: 0, maxDelay: 0 } };
+      const fault: FaultConfig = {
+        type: 'latency',
+        config: { minDelay: 0, maxDelay: 0 },
+      };
       const promise = injector.inject(fault, context);
       vi.advanceTimersByTime(0);
       const result = await promise;
@@ -106,7 +129,11 @@ describe('LatencyInjector', () => {
     it('should default to uniform for unknown distribution', async () => {
       const fault: FaultConfig = {
         type: 'latency',
-        config: { minDelay: 0, maxDelay: 10, distribution: 'unknown' as 'uniform' },
+        config: {
+          minDelay: 0,
+          maxDelay: 10,
+          distribution: 'unknown' as 'uniform',
+        },
       };
       const promise = injector.inject(fault, context);
       vi.advanceTimersByTime(50);
@@ -145,7 +172,7 @@ describe('LatencyInjector', () => {
     it('should reject NaN values in config', () => {
       const fault: FaultConfig = {
         type: 'latency',
-        config: { minDelay: NaN, maxDelay: 200 },
+        config: { minDelay: Number.NaN, maxDelay: 200 },
       };
       expect(injector.canInject(fault, context)).toBe(false);
     });

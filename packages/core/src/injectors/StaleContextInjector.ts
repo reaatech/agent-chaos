@@ -2,9 +2,9 @@ import { DEFAULT_STALENESS_SECONDS } from '../constants.js';
 import type { StaleContextConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';

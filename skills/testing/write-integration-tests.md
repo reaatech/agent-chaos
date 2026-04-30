@@ -57,7 +57,7 @@ Please execute the "write-integration-tests" skill with:
 import { createChaosEngine, type ChaosEngine } from '../ChaosEngine';
 import { createStandardInjectors } from '../injectors';
 import type { Scenario } from '../types';
-import { createScenarioLoader } from '@agent-chaos/scenarios';
+import { createScenarioLoader } from '@reaatech/agent-chaos-scenarios';
 
 export interface IntegrationTestEnvironment {
   engine: ChaosEngine;
@@ -406,9 +406,9 @@ describe('ChaosEngine Integration', () => {
 
 ```typescript
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { createChaosEngine } from '@agent-chaos/core';
+import { createChaosEngine } from '@reaatech/agent-chaos-core';
 import { createAdapter } from '../index';
-import type { Scenario } from '@agent-chaos/core';
+import type { Scenario } from '@reaatech/agent-chaos-core';
 
 describe('Adapter Integration', () => {
   // Note: These tests would require the actual frameworks to be installed
@@ -612,11 +612,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@agent-chaos/core': resolve(__dirname, 'packages/core/src'),
-      '@agent-chaos/scenarios': resolve(__dirname, 'packages/scenarios/src'),
-      '@agent-chaos/cli': resolve(__dirname, 'packages/cli/src'),
-      '@agent-chaos/adapters': resolve(__dirname, 'packages/adapters/src'),
-      '@agent-chaos/observability': resolve(__dirname, 'packages/observability/src'),
+      '@reaatech/agent-chaos-core': resolve(__dirname, 'packages/core/src'),
+      '@reaatech/agent-chaos-scenarios': resolve(__dirname, 'packages/scenarios/src'),
+      '@reaatech/agent-chaos-cli': resolve(__dirname, 'packages/cli/src'),
+      '@reaatech/agent-chaos-adapters': resolve(__dirname, 'packages/adapters/src'),
+      '@reaatech/agent-chaos-observability': resolve(__dirname, 'packages/observability/src'),
     },
   },
 });

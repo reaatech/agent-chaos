@@ -14,7 +14,9 @@ const TEMPLATES = [
 
 function resolveTemplateDir(): string {
   const require = createRequire(import.meta.url);
-  return path.dirname(require.resolve('@agent-chaos/scenarios/templates/network-degradation.yaml'));
+  return path.dirname(
+    require.resolve('@reaatech/agent-chaos-scenarios/templates/network-degradation.yaml'),
+  );
 }
 
 export async function generateCommand(type: string, options: { output?: string }): Promise<void> {
@@ -39,7 +41,7 @@ export async function generateCommand(type: string, options: { output?: string }
     console.log(chalk.green('✓'), `Generated scenario template: ${outputPath}`);
   } catch (error) {
     throw new Error(
-      `Failed to generate ${type}: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to generate ${type}: ${error instanceof Error ? error.message : 'Unknown error'}`,
     );
   }
 }

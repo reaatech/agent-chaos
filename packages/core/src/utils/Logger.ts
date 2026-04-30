@@ -1,4 +1,4 @@
-import type { ObservabilityConfig, LoggingConfig } from '../types/config.js';
+import type { LoggingConfig, ObservabilityConfig } from '../types/config.js';
 
 const VALID_LEVELS: Array<'debug' | 'info' | 'warn' | 'error'> = ['debug', 'info', 'warn', 'error'];
 const VALID_FORMATS: LoggingConfig['format'][] = ['json', 'text'];
@@ -60,7 +60,7 @@ export class Logger {
   private async log(
     level: 'debug' | 'info' | 'warn' | 'error',
     message: string,
-    meta?: Record<string, unknown>
+    meta?: Record<string, unknown>,
   ): Promise<void> {
     if (VALID_LEVELS.indexOf(level) < VALID_LEVELS.indexOf(this.level)) {
       return;

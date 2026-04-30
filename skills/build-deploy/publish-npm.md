@@ -130,7 +130,7 @@ export { runPublish };
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@agent-chaos/*"]],
+  "fixed": [["@reaatech/agent-chaos-*"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
