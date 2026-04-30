@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { uniform, exponential, normal, burst, sampleDistribution } from './distributions.js';
 import { SeededRandom } from './RandomSource.js';
+import { burst, exponential, normal, sampleDistribution, uniform } from './distributions.js';
 
 describe('distributions', () => {
   describe('uniform', () => {
@@ -89,7 +89,11 @@ describe('distributions', () => {
     });
 
     it('should default to uniform for unknown type', () => {
-      const v = sampleDistribution({ type: 'unknown' as 'uniform', min: 0, max: 10 });
+      const v = sampleDistribution({
+        type: 'unknown' as 'uniform',
+        min: 0,
+        max: 10,
+      });
       expect(v).toBeGreaterThanOrEqual(0);
       expect(v).toBeLessThanOrEqual(10);
     });

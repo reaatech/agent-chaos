@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { Middleware } from './Middleware.js';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ChaosEngine } from './ChaosEngine.js';
-import type { ToolCall, Scenario, Injector } from './types/index.js';
+import { Middleware } from './Middleware.js';
+import type { Injector, Scenario, ToolCall } from './types/index.js';
 import { MathRandom } from './utils/RandomSource.js';
 
 describe('Middleware', () => {
@@ -62,7 +62,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
       };
@@ -83,7 +89,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
       };
@@ -112,7 +124,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
       };
@@ -158,7 +176,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
       };
@@ -180,7 +204,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: 'other.*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
         overrides: [
@@ -215,7 +245,13 @@ describe('Middleware', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 0 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 0,
+              },
+            ],
           },
         ],
       };
@@ -249,14 +285,23 @@ describe('Middleware', () => {
     });
 
     it('should return timeout response when execution exceeds timeout', async () => {
-      const mw = new Middleware(engine, { timeout: 100, randomSource: new MathRandom() });
+      const mw = new Middleware(engine, {
+        timeout: 100,
+        randomSource: new MathRandom(),
+      });
 
       const scenario: Scenario = {
         name: 'test',
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency', config: { minDelay: 100, maxDelay: 200 }, probability: 1 }],
+            faults: [
+              {
+                type: 'latency',
+                config: { minDelay: 100, maxDelay: 200 },
+                probability: 1,
+              },
+            ],
           },
         ],
       };
@@ -291,7 +336,10 @@ describe('Middleware', () => {
     });
 
     it('should complete normally when execution finishes within timeout', async () => {
-      const mw = new Middleware(engine, { timeout: 1000, randomSource: new MathRandom() });
+      const mw = new Middleware(engine, {
+        timeout: 1000,
+        randomSource: new MathRandom(),
+      });
 
       const scenario: Scenario = {
         name: 'test',

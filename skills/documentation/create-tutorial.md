@@ -167,7 +167,7 @@ engineering for your agent system and run your first fault injection scenario.
 ## Step 1: Install Agent Chaos
 
 \`\`\`bash
-pnpm add @agent-chaos/core @agent-chaos/scenarios
+pnpm add @reaatech/agent-chaos-core @reaatech/agent-chaos-scenarios
 \`\`\`
 
 ## Step 2: Create Your First Scenario
@@ -191,8 +191,8 @@ targets:
 ## Step 3: Run the Chaos Test
 
 \`\`\`typescript
-import { createChaosEngine } from '@agent-chaos/core';
-import { createScenarioLoader } from '@agent-chaos/scenarios';
+import { createChaosEngine } from '@reaatech/agent-chaos-core';
+import { createScenarioLoader } from '@reaatech/agent-chaos-scenarios';
 
 async function runChaosTest() {
 const engine = createChaosEngine();

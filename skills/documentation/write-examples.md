@@ -84,8 +84,8 @@ examples/
 ### Basic Usage Example (examples/basic-usage/src/index.ts)
 
 ```typescript
-import { createChaosEngine, createStandardInjectors } from '@agent-chaos/core';
-import { createScenarioLoader } from '@agent-chaos/scenarios';
+import { createChaosEngine, createStandardInjectors } from '@reaatech/agent-chaos-core';
+import { createScenarioLoader } from '@reaatech/agent-chaos-scenarios';
 
 async function main() {
   // 1. Create chaos engine

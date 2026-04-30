@@ -55,7 +55,7 @@ Please execute the "create-adapter" skill with:
 ### Base Adapter Interface (packages/adapters/src/base.ts)
 
 ```typescript
-import type { ChaosEngine, ToolCall, ToolResponse } from '@agent-chaos/core';
+import type { ChaosEngine, ToolCall, ToolResponse } from '@reaatech/agent-chaos-core';
 
 export interface AdapterOptions {
   engine: ChaosEngine;
@@ -112,7 +112,7 @@ export abstract class BaseAdapter implements Adapter {
 
 ```typescript
 import { BaseAdapter, type AdapterOptions } from './base';
-import type { ChaosEngine, ToolCall, ToolResponse } from '@agent-chaos/core';
+import type { ChaosEngine, ToolCall, ToolResponse } from '@reaatech/agent-chaos-core';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface LangChainAdapterOptions extends AdapterOptions {
@@ -227,7 +227,7 @@ export function createLangChainAdapter(options: LangChainAdapterOptions): LangCh
 
 ```typescript
 import { BaseAdapter, type AdapterOptions } from './base';
-import type { ChaosEngine, ToolCall, ToolResponse } from '@agent-chaos/core';
+import type { ChaosEngine, ToolCall, ToolResponse } from '@reaatech/agent-chaos-core';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface LlamaIndexAdapterOptions extends AdapterOptions {
@@ -316,7 +316,7 @@ export function createLlamaIndexAdapter(options: LlamaIndexAdapterOptions): Llam
 
 ```typescript
 import { BaseAdapter, type AdapterOptions } from './base';
-import type { ChaosEngine, ToolCall, ToolResponse } from '@agent-chaos/core';
+import type { ChaosEngine, ToolCall, ToolResponse } from '@reaatech/agent-chaos-core';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface VercelAIAdapterOptions extends AdapterOptions {
@@ -421,7 +421,7 @@ export function createVercelAIAdapter(options: VercelAIAdapterOptions): VercelAI
 
 ```typescript
 import { BaseAdapter, type AdapterOptions } from './base';
-import type { ChaosEngine, ToolCall, ToolResponse } from '@agent-chaos/core';
+import type { ChaosEngine, ToolCall, ToolResponse } from '@reaatech/agent-chaos-core';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface GenericAdapterOptions extends AdapterOptions {
@@ -529,7 +529,7 @@ export { VercelAIAdapter, createVercelAIAdapter } from './vercel-ai';
 export { GenericAdapter, createGenericAdapter } from './generic';
 
 // Factory function to create adapter by name
-import type { ChaosEngine } from '@agent-chaos/core';
+import type { ChaosEngine } from '@reaatech/agent-chaos-core';
 
 export function createAdapter(
   framework: string,

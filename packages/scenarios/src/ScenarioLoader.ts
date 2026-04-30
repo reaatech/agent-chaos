@@ -1,8 +1,13 @@
-import { watch as fsWatch, type FSWatcher } from 'node:fs';
+import { type FSWatcher, watch as fsWatch } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 
-import type { Scenario, TargetConfig, OverrideConfig, ScenarioDefaults } from '@agent-chaos/core';
+import type {
+  OverrideConfig,
+  Scenario,
+  ScenarioDefaults,
+  TargetConfig,
+} from '@reaatech/agent-chaos-core';
 import YAML from 'yaml';
 
 import { SchemaValidator } from './SchemaValidator.js';
@@ -103,7 +108,7 @@ export class ScenarioLoader {
       }
       throw new ScenarioLoadError(
         absolutePath,
-        error instanceof Error ? error.message : 'Unknown error'
+        error instanceof Error ? error.message : 'Unknown error',
       );
     }
   }
@@ -137,7 +142,7 @@ export class ScenarioLoader {
     } catch (error) {
       throw new ScenarioLoadError(
         absolutePath,
-        error instanceof Error ? error.message : 'Unknown error'
+        error instanceof Error ? error.message : 'Unknown error',
       );
     }
   }
@@ -167,7 +172,9 @@ export class ScenarioLoader {
         this.loadedScenarios.delete(absolutePath);
         this.loadingPromises.delete(absolutePath);
         const scenario = await this.load(absolutePath);
-        this.reloadCallbacks.forEach((cb) => cb(scenario));
+        for (const cb of this.reloadCallbacks) {
+          cb(scenario);
+        }
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Unknown error';
         console.warn(`Failed to reload scenario ${absolutePath}: ${message}`);
@@ -221,7 +228,7 @@ export class ScenarioLoader {
   private async resolveExtends(
     scenario: Scenario,
     basePath: string,
-    stack: string[]
+    stack: string[],
   ): Promise<Scenario> {
     const parentRefs = Array.isArray(scenario.extends) ? scenario.extends : [scenario.extends];
     const parents: Scenario[] = [];
@@ -234,7 +241,7 @@ export class ScenarioLoader {
     }
 
     const merged = this.mergeScenarios(parents, scenario);
-    delete (merged as unknown as Record<string, unknown>).extends;
+    (merged as unknown as Record<string, unknown>).extends = undefined;
     return merged;
   }
 
@@ -265,7 +272,7 @@ export class ScenarioLoader {
 
     const mergedDefaults = this.mergeDefaults(
       parents.map((p) => p.defaults),
-      child.defaults
+      child.defaults,
     );
 
     return {
@@ -276,7 +283,7 @@ export class ScenarioLoader {
       targets: Array.from(mergedTargets.values()),
       overrides: Array.from(mergedOverrides.values()),
       metadata: {
-        ...parents.reduce((acc, p) => ({ ...acc, ...p.metadata }), {}),
+        ...parents.reduce((acc, p) => Object.assign(acc, p.metadata), {}),
         ...child.metadata,
         composed: true,
       },
@@ -285,7 +292,7 @@ export class ScenarioLoader {
 
   private mergeDefaults(
     parentDefaults: (ScenarioDefaults | undefined)[],
-    childDefaults?: ScenarioDefaults
+    childDefaults?: ScenarioDefaults,
   ): ScenarioDefaults | undefined {
     const validParents = parentDefaults.filter((d): d is ScenarioDefaults => d !== undefined);
     if (validParents.length === 0 && !childDefaults) return undefined;
@@ -317,7 +324,7 @@ export class ScenarioLoader {
     } catch (error) {
       throw new ScenarioParseError(
         filePath,
-        error instanceof Error ? error.message : 'Unknown parsing error'
+        error instanceof Error ? error.message : 'Unknown parsing error',
       );
     }
   }
@@ -334,7 +341,7 @@ export class ScenarioLoader {
 export class ScenarioLoadError extends Error {
   constructor(
     public readonly filePath: string,
-    message: string
+    message: string,
   ) {
     super(`Failed to load scenario from ${filePath}: ${message}`);
     this.name = 'ScenarioLoadError';
@@ -344,7 +351,7 @@ export class ScenarioLoadError extends Error {
 export class ScenarioParseError extends Error {
   constructor(
     public readonly filePath: string,
-    message: string
+    message: string,
   ) {
     super(`Failed to parse scenario ${filePath}: ${message}`);
     this.name = 'ScenarioParseError';
@@ -355,7 +362,7 @@ export class ScenarioValidationError extends Error {
   constructor(
     public readonly filePath: string,
     public readonly messages: string[],
-    public readonly details?: unknown
+    public readonly details?: unknown,
   ) {
     super(`Validation failed for ${filePath}:\n${messages.join('\n')}`);
     this.name = 'ScenarioValidationError';

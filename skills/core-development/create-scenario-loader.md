@@ -206,7 +206,7 @@ import * as path from 'path';
 import YAML from 'yaml';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { Scenario } from '@agent-chaos/core';
+import type { Scenario } from '@reaatech/agent-chaos-core';
 import { Logger } from './utils/Logger';
 
 export interface ScenarioLoaderOptions {
@@ -564,7 +564,7 @@ export const templates = {
 ```typescript
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { Scenario } from '@agent-chaos/core';
+import type { Scenario } from '@reaatech/agent-chaos-core';
 
 export interface ValidationResult {
   valid: boolean;

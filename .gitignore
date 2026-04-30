@@ -42,5 +42,13 @@ Thumbs.db
 *.tmp
 *.temp
 
+# Stray build output in src/
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+packages/*/src/**/*.d.cts
+packages/*/src/**/*.d.cts.map
+
 # Development
 DEV_PLAN.md

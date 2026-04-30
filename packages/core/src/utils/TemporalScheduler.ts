@@ -11,7 +11,7 @@ export class TemporalScheduler {
 
   evaluateCondition(
     condition: FaultCondition,
-    context: { toolName: string; callCount: number }
+    context: { toolName: string; callCount: number },
   ): boolean {
     switch (condition.type) {
       case 'timeWindow':
@@ -54,10 +54,10 @@ export class TemporalScheduler {
 
   private evaluateCallCount(
     config: Record<string, unknown>,
-    context: { toolName: string; callCount: number }
+    context: { toolName: string; callCount: number },
   ): boolean {
     const minCalls = Number(config.minCalls ?? 0);
-    const maxCalls = Number(config.maxCalls ?? Infinity);
+    const maxCalls = Number(config.maxCalls ?? Number.POSITIVE_INFINITY);
     const count = context.callCount;
 
     return count >= minCalls && count <= maxCalls;

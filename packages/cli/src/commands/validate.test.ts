@@ -2,7 +2,7 @@ import * as fs from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { validateCommand } from './validate.js';
 
@@ -22,7 +22,7 @@ describe('validateCommand', () => {
     await fs.writeFile(
       filePath,
       `name: test-scenario\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
-      'utf-8'
+      'utf-8',
     );
 
     await expect(validateCommand(filePath)).resolves.toBeUndefined();
@@ -41,7 +41,7 @@ describe('validateCommand', () => {
           },
         ],
       }),
-      'utf-8'
+      'utf-8',
     );
 
     await expect(validateCommand(filePath)).resolves.toBeUndefined();
@@ -61,7 +61,7 @@ targets:
           minDelay: notanumber
           maxDelay: 100
 `,
-      'utf-8'
+      'utf-8',
     );
 
     await expect(validateCommand(filePath)).rejects.toThrow('Validation failed');

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { Scenario } from '@agent-chaos/core';
+import type { Scenario } from '@reaatech/agent-chaos-core';
 import { Ajv } from 'ajv';
 import type { ErrorObject } from 'ajv';
 import addFormats from 'ajv-formats';

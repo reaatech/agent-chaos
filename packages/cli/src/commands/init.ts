@@ -11,7 +11,7 @@ export async function initCommand(): Promise<void> {
     await fs.mkdir(scenariosDir, { recursive: true });
   } catch (error) {
     throw new Error(
-      `Failed to create scenarios directory: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to create scenarios directory: ${error instanceof Error ? error.message : 'Unknown error'}`,
     );
   }
 
@@ -42,7 +42,7 @@ metadata:
   try {
     const exists = await fs.access(samplePath).then(
       () => true,
-      () => false
+      () => false,
     );
     if (exists) {
       console.log(chalk.yellow('!'), `Scenario already exists, skipping: ${samplePath}`);
@@ -56,7 +56,7 @@ metadata:
     await fs.writeFile(samplePath, sampleScenario, 'utf-8');
   } catch (error) {
     throw new Error(
-      `Failed to write sample scenario: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to write sample scenario: ${error instanceof Error ? error.message : 'Unknown error'}`,
     );
   }
 

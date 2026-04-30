@@ -1,9 +1,9 @@
 import type { PartialFailureConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
@@ -29,7 +29,9 @@ export class PartialFailureInjector implements Injector {
     if (!this.isValidConfig(config)) return false;
 
     if (config.failureRate !== undefined && (config.failureRate < 0 || config.failureRate > 1)) {
-      this.logger.warn('Invalid failureRate value', { failureRate: config.failureRate });
+      this.logger.warn('Invalid failureRate value', {
+        failureRate: config.failureRate,
+      });
       return false;
     }
 

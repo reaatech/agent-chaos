@@ -50,7 +50,7 @@ Please execute the "write-e2e-tests" skill with:
 ```typescript
 // packages/e2e/src/network-degradation.e2e.test.ts
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { createChaosEngine, createAdapter } from '@agent-chaos/core';
+import { createChaosEngine, createAdapter } from '@reaatech/agent-chaos-core';
 import { MockAgent } from './mocks/MockAgent';
 
 describe('Network Degradation E2E', () => {

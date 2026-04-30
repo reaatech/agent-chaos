@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -8,7 +8,12 @@ import { PartialFailureInjector } from './PartialFailureInjector.js';
 describe('PartialFailureInjector', () => {
   const injector = new PartialFailureInjector();
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],
@@ -17,17 +22,26 @@ describe('PartialFailureInjector', () => {
 
   describe('canInject', () => {
     it('should return true for valid config', () => {
-      const fault: FaultConfig = { type: 'partialFailure', config: { failureRate: 0.3 } };
+      const fault: FaultConfig = {
+        type: 'partialFailure',
+        config: { failureRate: 0.3 },
+      };
       expect(injector.canInject(fault, context)).toBe(true);
     });
 
     it('should return false for negative failureRate', () => {
-      const fault: FaultConfig = { type: 'partialFailure', config: { failureRate: -0.1 } };
+      const fault: FaultConfig = {
+        type: 'partialFailure',
+        config: { failureRate: -0.1 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
 
     it('should return false for failureRate > 1', () => {
-      const fault: FaultConfig = { type: 'partialFailure', config: { failureRate: 1.5 } };
+      const fault: FaultConfig = {
+        type: 'partialFailure',
+        config: { failureRate: 1.5 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
   });
@@ -64,11 +78,16 @@ describe('PartialFailureInjector', () => {
       };
       const result = await injector.inject(fault, context);
 
-      expect(result.mockResponse?.metadata).toMatchObject({ errorType: 'customError' });
+      expect(result.mockResponse?.metadata).toMatchObject({
+        errorType: 'customError',
+      });
     });
 
     it('should not inject when failureRate is 0', async () => {
-      const fault: FaultConfig = { type: 'partialFailure', config: { failureRate: 0 } };
+      const fault: FaultConfig = {
+        type: 'partialFailure',
+        config: { failureRate: 0 },
+      };
       const result = await injector.inject(fault, context);
       expect(result.shouldInject).toBe(false);
     });

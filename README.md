@@ -12,7 +12,7 @@ See LICENSE file in the project root for full license information.
 
 <p align="center">
   <a href="https://github.com/reaatech/agent-chaos/actions"><img src="https://img.shields.io/github/actions/workflow/status/reaatech/agent-chaos/ci.yml?branch=main&style=flat-square" alt="CI" /></a>
-  <a href="https://www.npmjs.com/package/@agent-chaos/core"><img src="https://img.shields.io/npm/v/@agent-chaos/core?style=flat-square&color=blue" alt="npm" /></a>
+  <a href="https://www.npmjs.com/package/@reaatech/agent-chaos-core"><img src="https://img.shields.io/npm/v/@reaatech/agent-chaos-core?style=flat-square&color=blue" alt="npm" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License" /></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen?style=flat-square" alt="Node" /></a>
   <a href="https://pnpm.io"><img src="https://img.shields.io/badge/pnpm-%3E%3D9.0.0-orange?style=flat-square" alt="pnpm" /></a>
@@ -72,7 +72,7 @@ You've built circuit breakers, confidence gates, and fallback trees — Agent Ch
 
 ```bash
 # Install globally
-npm install -g @agent-chaos/cli
+npm install -g @reaatech/agent-chaos-cli
 
 # Initialize a new project
 agent-chaos init
@@ -90,7 +90,7 @@ agent-chaos run ./scenarios/network-degradation.yaml
 ### Programmatic API
 
 ```typescript
-import { createChaosEngine } from '@agent-chaos/core';
+import { createChaosEngine } from '@reaatech/agent-chaos-core';
 
 const engine = createChaosEngine({ mode: 'inject' });
 
@@ -164,11 +164,11 @@ overrides:
 
 | Package                      | Description                                       | Status         |
 | ---------------------------- | ------------------------------------------------- | -------------- |
-| `@agent-chaos/core`          | Fault injection engine, middleware, and injectors | Published      |
-| `@agent-chaos/scenarios`     | Scenario loader, validator, and templates         | Published      |
-| `@agent-chaos/cli`           | Command-line interface                            | Published      |
-| `@agent-chaos/adapters`      | LangChain, LlamaIndex, and Vercel AI SDK adapters | Planned (v0.2) |
-| `@agent-chaos/observability` | Metrics, structured logging, and OpenTelemetry    | Planned (v0.2) |
+| `@reaatech/agent-chaos-core`          | Fault injection engine, middleware, and injectors | Published      |
+| `@reaatech/agent-chaos-scenarios`     | Scenario loader, validator, and templates         | Published      |
+| `@reaatech/agent-chaos-cli`           | Command-line interface                            | Published      |
+| `@reaatech/agent-chaos-adapters`      | LangChain, LlamaIndex, and Vercel AI SDK adapters | Planned (v0.2) |
+| `@reaatech/agent-chaos-observability` | Metrics, structured logging, and OpenTelemetry    | Planned (v0.2) |
 
 ---
 

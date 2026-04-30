@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { FaultConfig, InjectionContext } from '../types/index.js';
 import { MathRandom } from '../utils/RandomSource.js';
@@ -8,7 +8,12 @@ import { RateLimitInjector } from './RateLimitInjector.js';
 describe('RateLimitInjector', () => {
   const injector = new RateLimitInjector();
   const context: InjectionContext = {
-    toolCall: { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() },
+    toolCall: {
+      id: '1',
+      name: 'testTool',
+      arguments: {},
+      timestamp: Date.now(),
+    },
     scenario: { name: 'test', targets: [] },
     previousCalls: [],
     previousResponses: [],
@@ -17,12 +22,18 @@ describe('RateLimitInjector', () => {
 
   describe('canInject', () => {
     it('should return true for valid config', () => {
-      const fault: FaultConfig = { type: 'rateLimit', config: { retryAfter: 60 } };
+      const fault: FaultConfig = {
+        type: 'rateLimit',
+        config: { retryAfter: 60 },
+      };
       expect(injector.canInject(fault, context)).toBe(true);
     });
 
     it('should return false for negative retryAfter', () => {
-      const fault: FaultConfig = { type: 'rateLimit', config: { retryAfter: -1 } };
+      const fault: FaultConfig = {
+        type: 'rateLimit',
+        config: { retryAfter: -1 },
+      };
       expect(injector.canInject(fault, context)).toBe(false);
     });
   });
@@ -55,7 +66,9 @@ describe('RateLimitInjector', () => {
       const fault: FaultConfig = { type: 'rateLimit', config: {} };
       const result = await injector.inject(fault, context);
 
-      expect(result.mockResponse?.error?.details).toMatchObject({ retryAfter: 60 });
+      expect(result.mockResponse?.error?.details).toMatchObject({
+        retryAfter: 60,
+      });
     });
 
     it('should use custom error message', async () => {

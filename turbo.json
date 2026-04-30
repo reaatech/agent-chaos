@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["tsconfig.base.json", "package.json"],
+  "globalDependencies": ["tsconfig.json", "package.json"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -12,9 +12,9 @@
       "outputs": [],
       "cache": true
     },
-    "lint": {
-      "dependsOn": ["^build"],
-      "outputs": [],
+    "test:coverage": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"],
       "cache": true
     },
     "type-check": {

@@ -2,9 +2,9 @@ import { DEFAULT_RETRY_AFTER } from '../constants.js';
 import type { RateLimitConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
@@ -30,7 +30,9 @@ export class RateLimitInjector implements Injector {
     if (!this.isValidConfig(config)) return false;
 
     if (config.retryAfter !== undefined && config.retryAfter < 0) {
-      this.logger.warn('Invalid retryAfter value', { retryAfter: config.retryAfter });
+      this.logger.warn('Invalid retryAfter value', {
+        retryAfter: config.retryAfter,
+      });
       return false;
     }
     return true;

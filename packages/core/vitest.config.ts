@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   resolve: {
     alias: {
-      '@agent-chaos/core': new URL('./src', import.meta.url).pathname,
+      '@reaatech/agent-chaos-core': new URL('./src', import.meta.url).pathname,
     },
   },
   test: {

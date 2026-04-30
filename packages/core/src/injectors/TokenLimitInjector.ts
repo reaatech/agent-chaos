@@ -1,10 +1,10 @@
-import { DEFAULT_REMAINING_TOKENS, DEFAULT_MAX_TOKENS } from '../constants.js';
+import { DEFAULT_MAX_TOKENS, DEFAULT_REMAINING_TOKENS } from '../constants.js';
 import type { TokenLimitConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
@@ -31,7 +31,9 @@ export class TokenLimitInjector implements Injector {
     if (!this.isValidConfig(config)) return false;
 
     if (config.maxTokens !== undefined && config.maxTokens < 0) {
-      this.logger.warn('Invalid maxTokens value', { maxTokens: config.maxTokens });
+      this.logger.warn('Invalid maxTokens value', {
+        maxTokens: config.maxTokens,
+      });
       return false;
     }
 

@@ -1,4 +1,4 @@
-import { createChaosEngine } from '@agent-chaos/core';
+import { createChaosEngine } from '@reaatech/agent-chaos-core';
 
 const engine = createChaosEngine({ mode: 'inject' });
 
@@ -8,7 +8,11 @@ engine.loadScenario({
     {
       selector: 'api.*',
       faults: [
-        { type: 'latency', config: { minDelay: 100, maxDelay: 500 }, probability: 0.3 },
+        {
+          type: 'latency',
+          config: { minDelay: 100, maxDelay: 500 },
+          probability: 0.3,
+        },
         { type: 'timeout', config: { timeout: 3000 }, probability: 0.1 },
       ],
     },

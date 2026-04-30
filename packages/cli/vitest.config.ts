@@ -3,9 +3,9 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   resolve: {
     alias: {
-      '@agent-chaos/core': new URL('../core/src', import.meta.url).pathname,
-      '@agent-chaos/scenarios': new URL('../scenarios/src', import.meta.url).pathname,
-      '@agent-chaos/cli': new URL('./src', import.meta.url).pathname,
+      '@reaatech/agent-chaos-core': new URL('../core/src', import.meta.url).pathname,
+      '@reaatech/agent-chaos-scenarios': new URL('../scenarios/src', import.meta.url).pathname,
+      '@reaatech/agent-chaos-cli': new URL('./src', import.meta.url).pathname,
     },
   },
   test: {

@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { MockInstance } from 'vitest';
 
 import { Logger } from './Logger.js';
 
 describe('Logger', () => {
-  let consoleSpy: MockInstance<Parameters<typeof console.log>, ReturnType<typeof console.log>>;
-  let errorSpy: MockInstance<Parameters<typeof console.error>, ReturnType<typeof console.error>>;
+  let consoleSpy: MockInstance<typeof console.log>;
+  let errorSpy: MockInstance<typeof console.error>;
 
   beforeEach(() => {
     consoleSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});

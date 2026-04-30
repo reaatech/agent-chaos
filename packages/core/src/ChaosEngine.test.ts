@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ChaosEngine, createChaosEngine } from './ChaosEngine.js';
 import { LatencyInjector } from './injectors/LatencyInjector.js';
 import type { Scenario, ToolCall } from './types/index.js';
@@ -108,7 +108,12 @@ describe('ChaosEngine', () => {
   describe('intercept', () => {
     it('should passthrough in passthrough mode', async () => {
       engine.setMode('passthrough');
-      const call: ToolCall = { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() };
+      const call: ToolCall = {
+        id: '1',
+        name: 'testTool',
+        arguments: {},
+        timestamp: Date.now(),
+      };
       const response = await engine.intercept(call);
       expect(response.toolName).toBe('testTool');
       expect(response.error).toBeUndefined();
@@ -116,7 +121,12 @@ describe('ChaosEngine', () => {
 
     it('should record tool calls in record mode', async () => {
       engine.setMode('record');
-      const call: ToolCall = { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() };
+      const call: ToolCall = {
+        id: '1',
+        name: 'testTool',
+        arguments: {},
+        timestamp: Date.now(),
+      };
       const response = await engine.intercept(call);
       expect(response.toolName).toBe('testTool');
 
@@ -143,14 +153,24 @@ describe('ChaosEngine', () => {
       engine.loadScenario(scenario);
       engine.setMode('inject');
 
-      const call: ToolCall = { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() };
+      const call: ToolCall = {
+        id: '1',
+        name: 'testTool',
+        arguments: {},
+        timestamp: Date.now(),
+      };
       const response = await engine.intercept(call);
       expect(response.toolName).toBe('testTool');
     });
 
     it('should return response even when no scenario matches', async () => {
       engine.setMode('inject');
-      const call: ToolCall = { id: '2', name: 'unknownTool', arguments: {}, timestamp: Date.now() };
+      const call: ToolCall = {
+        id: '2',
+        name: 'unknownTool',
+        arguments: {},
+        timestamp: Date.now(),
+      };
       const response = await engine.intercept(call);
       expect(response.toolName).toBe('unknownTool');
       expect(response.result).toBeNull();
@@ -212,7 +232,12 @@ describe('ChaosEngine', () => {
       engine.loadScenario(scenario);
       engine.setMode('inject');
 
-      const call: ToolCall = { id: '1', name: 'testTool', arguments: {}, timestamp: Date.now() };
+      const call: ToolCall = {
+        id: '1',
+        name: 'testTool',
+        arguments: {},
+        timestamp: Date.now(),
+      };
       await engine.intercept(call);
 
       engine.reset();

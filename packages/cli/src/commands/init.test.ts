@@ -2,14 +2,14 @@ import * as fs from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { MockInstance } from 'vitest';
 
 import { initCommand } from './init.js';
 
 describe('initCommand', () => {
   let tmpDir: string;
-  let cwdSpy: MockInstance<[], string>;
+  let cwdSpy: MockInstance<() => string>;
 
   beforeEach(async () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-chaos-init-'));

@@ -1,2 +1,2 @@
-// @agent-chaos/adapters - Framework adapters
+// @reaatech/agent-chaos-adapters - Framework adapters
 export {};

@@ -20,7 +20,7 @@ export class SeededRandom implements RandomSource {
     const truncated = seed | 0;
     if (seed !== truncated) {
       globalThis.console.warn(
-        `SeededRandom: seed ${seed} exceeds 32-bit range, truncated to ${truncated}`
+        `SeededRandom: seed ${seed} exceeds 32-bit range, truncated to ${truncated}`,
       );
     }
     this.state = truncated;

@@ -1,9 +1,9 @@
 import type { MalformedOutputConfig } from '../types/faults.js';
 import type {
   FaultConfig,
-  Injector,
   InjectionContext,
   InjectionResult,
+  Injector,
   ToolResponse,
 } from '../types/index.js';
 import { Logger } from '../utils/Logger.js';
@@ -102,7 +102,7 @@ export class MalformedOutputInjector implements Injector {
   private generateTruncatedOutput(context: InjectionContext, corruptionFactor: number): string {
     const complete = '{"status": "success", "data": {"items": [1, 2, 3, 4, 5]}}';
     const truncatePoint = Math.floor(
-      context.randomSource.random() * complete.length * corruptionFactor
+      context.randomSource.random() * complete.length * corruptionFactor,
     );
     return complete.substring(0, Math.max(1, truncatePoint));
   }

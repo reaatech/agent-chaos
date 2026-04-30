@@ -1,12 +1,14 @@
 import * as path from 'node:path';
 
-import { createChaosEngine } from '@agent-chaos/core';
-import { createScenarioLoader } from '@agent-chaos/scenarios';
+import { createChaosEngine } from '@reaatech/agent-chaos-core';
+import { createScenarioLoader } from '@reaatech/agent-chaos-scenarios';
 import chalk from 'chalk';
 
 const DEFAULT_SAMPLE_CALLS = 10;
 
-function collectToolNames(scenario: { targets?: Array<{ selector: string }> }): string[] {
+function collectToolNames(scenario: {
+  targets?: Array<{ selector: string }>;
+}): string[] {
   const toolNames = new Set<string>();
   const targets = scenario.targets ?? [];
   for (const target of targets) {
@@ -24,7 +26,7 @@ function collectToolNames(scenario: { targets?: Array<{ selector: string }> }): 
 
 export async function runCommand(
   scenarioPath: string,
-  options: { watch?: boolean }
+  options: { watch?: boolean },
 ): Promise<void> {
   const absolutePath = path.resolve(scenarioPath);
   const loader = createScenarioLoader();
@@ -76,18 +78,18 @@ export async function runCommand(
 
     if (response.error) {
       console.log(
-        chalk.red(`  ✗`),
-        `Call #${i + 1} ${toolName}: ${response.error.code} - ${response.error.message}`
+        chalk.red('  ✗'),
+        `Call #${i + 1} ${toolName}: ${response.error.code} - ${response.error.message}`,
       );
     } else {
-      console.log(chalk.green(`  ✓`), `Call #${i + 1} ${toolName}: passed through`);
+      console.log(chalk.green('  ✓'), `Call #${i + 1} ${toolName}: passed through`);
     }
   }
 
   const events = engine.record();
   const faultsInjected = events.filter((e) => e.type === 'fault_injected');
 
-  console.log(chalk.blue(`\n── Summary ──`));
+  console.log(chalk.blue('\n── Summary ──'));
   console.log(`  Total calls:    ${DEFAULT_SAMPLE_CALLS}`);
   console.log(`  Faults injected: ${faultsInjected.length}`);
   console.log(`  Injectors:      ${engine.injectors.size}`);

@@ -83,11 +83,11 @@ Please execute the "configure-typescript" skill with:
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@agent-chaos/core": ["packages/core/src"],
-      "@agent-chaos/scenarios": ["packages/scenarios/src"],
-      "@agent-chaos/cli": ["packages/cli/src"],
-      "@agent-chaos/adapters": ["packages/adapters/src"],
-      "@agent-chaos/observability": ["packages/observability/src"]
+      "@reaatech/agent-chaos-core": ["packages/core/src"],
+      "@reaatech/agent-chaos-scenarios": ["packages/scenarios/src"],
+      "@reaatech/agent-chaos-cli": ["packages/cli/src"],
+      "@reaatech/agent-chaos-adapters": ["packages/adapters/src"],
+      "@reaatech/agent-chaos-observability": ["packages/observability/src"]
     }
   },
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
