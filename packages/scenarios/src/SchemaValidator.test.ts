@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { SchemaValidator } from './SchemaValidator.js';
 
@@ -12,7 +12,12 @@ describe('SchemaValidator', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency' as const, config: { minDelay: 100, maxDelay: 200 } }],
+            faults: [
+              {
+                type: 'latency' as const,
+                config: { minDelay: 100, maxDelay: 200 },
+              },
+            ],
           },
         ],
       };
@@ -35,7 +40,12 @@ describe('SchemaValidator', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'unknownType' as 'latency', config: { minDelay: 0, maxDelay: 0 } }],
+            faults: [
+              {
+                type: 'unknownType' as 'latency',
+                config: { minDelay: 0, maxDelay: 0 },
+              },
+            ],
           },
         ],
       };
@@ -51,7 +61,11 @@ describe('SchemaValidator', () => {
           {
             selector: '*',
             faults: [
-              { type: 'latency' as const, config: { minDelay: 0, maxDelay: 0 }, probability: 1.5 },
+              {
+                type: 'latency' as const,
+                config: { minDelay: 0, maxDelay: 0 },
+                probability: 1.5,
+              },
             ],
           },
         ],
@@ -99,7 +113,12 @@ describe('SchemaValidator', () => {
     it('should validate json content', async () => {
       const content = JSON.stringify({
         name: 'Test',
-        targets: [{ selector: '*', faults: [{ type: 'timeout', config: { timeout: 1000 } }] }],
+        targets: [
+          {
+            selector: '*',
+            faults: [{ type: 'timeout', config: { timeout: 1000 } }],
+          },
+        ],
       });
       const result = await validator.validateFile(content, 'json');
       expect(result.valid).toBe(true);
@@ -128,7 +147,12 @@ describe('SchemaValidator', () => {
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency' as const, config: { minDelay: 100, maxDelay: 200 } }],
+            faults: [
+              {
+                type: 'latency' as const,
+                config: { minDelay: 100, maxDelay: 200 },
+              },
+            ],
           },
         ],
       };

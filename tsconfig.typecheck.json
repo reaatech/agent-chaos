@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@reaatech/agent-chaos-core": ["./packages/core/src/index.ts"],
+      "@reaatech/agent-chaos-cli": ["./packages/cli/src/index.ts"],
+      "@reaatech/agent-chaos-scenarios": ["./packages/scenarios/src/index.ts"],
+      "@reaatech/agent-chaos-adapters": ["./packages/adapters/src/index.ts"],
+      "@reaatech/agent-chaos-observability": ["./packages/observability/src/index.ts"],
+      "@reaatech/agent-chaos-e2e": ["./packages/e2e/src/index.ts"]
+    }
+  }
+}

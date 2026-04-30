@@ -1,2 +1,2 @@
-// @agent-chaos/e2e - End-to-end tests
+// @reaatech/agent-chaos-e2e - End-to-end tests
 export {};

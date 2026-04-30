@@ -1,2 +1,2 @@
-// @agent-chaos/observability - Observability tools
+// @reaatech/agent-chaos-observability - Observability tools
 export {};

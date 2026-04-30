@@ -1,17 +1,17 @@
+import { Middleware } from './Middleware.js';
 import { DEFAULT_MIDDLEWARE_TIMEOUT } from './constants.js';
+import { createStandardInjectors } from './injectors/index.js';
 import type {
   ChaosEngineConfig,
-  ToolCall,
-  ToolResponse,
-  Scenario,
-  Injector,
-  FaultType,
   ChaosEvent,
   EngineMode,
+  FaultType,
+  Injector,
+  Scenario,
+  ToolCall,
+  ToolResponse,
 } from './types/index.js';
 import { Logger } from './utils/Logger.js';
-import { Middleware } from './Middleware.js';
-import { createStandardInjectors } from './injectors/index.js';
 import { MathRandom, type RandomSource } from './utils/RandomSource.js';
 
 export class ChaosEngine {
@@ -35,10 +35,14 @@ export class ChaosEngine {
     });
 
     const standardInjectors = createStandardInjectors();
-    standardInjectors.forEach((injector) => this.registerInjector(injector));
+    for (const injector of standardInjectors) {
+      this.registerInjector(injector);
+    }
 
     if (config.scenarios) {
-      config.scenarios.forEach((scenario) => this.loadScenario(scenario));
+      for (const scenario of config.scenarios) {
+        this.loadScenario(scenario);
+      }
     }
   }
 

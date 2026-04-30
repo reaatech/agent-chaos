@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
 import { program } from 'commander';
-import { validateCommand } from './commands/validate.js';
 import { generateCommand } from './commands/generate.js';
-import { runCommand } from './commands/run.js';
 import { initCommand } from './commands/init.js';
+import { runCommand } from './commands/run.js';
+import { validateCommand } from './commands/validate.js';
 
 const require = createRequire(import.meta.url);
-const pkg = require('@agent-chaos/cli/package.json') as { version: string };
+const pkg = require('@reaatech/agent-chaos-cli/package.json') as {
+  version: string;
+};
 
 async function handleError(fn: () => Promise<void>): Promise<void> {
   try {
@@ -34,7 +36,7 @@ program
   .description('Generate a scenario template')
   .option('-o, --output <dir>', 'Output directory', '.')
   .action(async (type: string, options: { output?: string }) =>
-    handleError(() => generateCommand(type, options))
+    handleError(() => generateCommand(type, options)),
   );
 
 program
@@ -42,7 +44,7 @@ program
   .description('Run a chaos scenario')
   .option('-w, --watch', 'Watch for changes and reload', false)
   .action(async (scenario: string, options: { watch?: boolean }) =>
-    handleError(() => runCommand(scenario, options))
+    handleError(() => runCommand(scenario, options)),
   );
 
 program

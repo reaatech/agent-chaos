@@ -2,14 +2,14 @@ import * as fs from 'node:fs/promises';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
-  ScenarioLoader,
-  createScenarioLoader,
   ScenarioLoadError,
+  type ScenarioLoader,
   ScenarioParseError,
   ScenarioValidationError,
+  createScenarioLoader,
 } from './ScenarioLoader.js';
 
 describe('ScenarioLoader', () => {
@@ -31,7 +31,7 @@ describe('ScenarioLoader', () => {
       const filePath = path.join(tempDir, 'test.yaml');
       await fs.writeFile(
         filePath,
-        `name: Test Scenario\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Test Scenario\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       const scenario = await loader.load(filePath);
@@ -45,8 +45,13 @@ describe('ScenarioLoader', () => {
         filePath,
         JSON.stringify({
           name: 'JSON Test',
-          targets: [{ selector: '*', faults: [{ type: 'timeout', config: { timeout: 1000 } }] }],
-        })
+          targets: [
+            {
+              selector: '*',
+              faults: [{ type: 'timeout', config: { timeout: 1000 } }],
+            },
+          ],
+        }),
       );
 
       const scenario = await loader.load(filePath);
@@ -57,7 +62,7 @@ describe('ScenarioLoader', () => {
       const filePath = path.join(tempDir, 'cached.yaml');
       await fs.writeFile(
         filePath,
-        `name: Cached\ntargets:\n  - selector: "*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`
+        `name: Cached\ntargets:\n  - selector: "*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`,
       );
 
       const s1 = await loader.load(filePath);
@@ -89,7 +94,7 @@ targets:
         config:
           minDelay: invalid
           maxDelay: 100
-`
+`,
       );
       await expect(loader.load(filePath)).rejects.toBeInstanceOf(ScenarioValidationError);
     });
@@ -110,12 +115,12 @@ targets:
 
       await fs.writeFile(
         basePath,
-        `name: Base\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Base\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await fs.writeFile(
         childPath,
-        `name: Child\nextends: base.yaml\ntargets:\n  - selector: "api.*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 5000\n`
+        `name: Child\nextends: base.yaml\ntargets:\n  - selector: "api.*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 5000\n`,
       );
 
       const scenario = await loader.load(childPath);
@@ -131,12 +136,12 @@ targets:
 
       await fs.writeFile(
         basePath,
-        `name: Base\ndefaults:\n  probability: 0.5\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Base\ndefaults:\n  probability: 0.5\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await fs.writeFile(
         childPath,
-        `name: Child\nextends: base.yaml\ndefaults:\n  delay: 100\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Child\nextends: base.yaml\ndefaults:\n  delay: 100\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       const scenario = await loader.load(childPath);
@@ -151,17 +156,17 @@ targets:
 
       await fs.writeFile(
         aPath,
-        `name: A\ntargets:\n  - selector: "a.*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: A\ntargets:\n  - selector: "a.*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await fs.writeFile(
         bPath,
-        `name: B\ntargets:\n  - selector: "b.*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`
+        `name: B\ntargets:\n  - selector: "b.*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`,
       );
 
       await fs.writeFile(
         childPath,
-        `name: Child\nextends:\n  - a.yaml\n  - b.yaml\ntargets:\n  - selector: "child.*"\n    faults:\n      - type: rateLimit\n        config:\n          retryAfter: 60\n`
+        `name: Child\nextends:\n  - a.yaml\n  - b.yaml\ntargets:\n  - selector: "child.*"\n    faults:\n      - type: rateLimit\n        config:\n          retryAfter: 60\n`,
       );
 
       const scenario = await loader.load(childPath);
@@ -173,11 +178,11 @@ targets:
     it('should load all scenarios in a directory', async () => {
       await fs.writeFile(
         path.join(tempDir, 's1.yaml'),
-        `name: S1\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: S1\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
       await fs.writeFile(
         path.join(tempDir, 's2.yaml'),
-        `name: S2\ntargets:\n  - selector: "*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`
+        `name: S2\ntargets:\n  - selector: "*"\n    faults:\n      - type: timeout\n        config:\n          timeout: 1000\n`,
       );
 
       const scenarios = await loader.loadAll(tempDir);
@@ -187,7 +192,7 @@ targets:
     it('should skip invalid scenarios in directory', async () => {
       await fs.writeFile(
         path.join(tempDir, 'valid.yaml'),
-        `name: Valid\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Valid\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
       await fs.writeFile(path.join(tempDir, 'invalid.yaml'), 'bad');
 
@@ -197,7 +202,7 @@ targets:
 
     it('should throw for missing directory', async () => {
       await expect(loader.loadAll(path.join(tempDir, 'missing'))).rejects.toBeInstanceOf(
-        ScenarioLoadError
+        ScenarioLoadError,
       );
     });
   });
@@ -207,7 +212,7 @@ targets:
       const filePath = path.join(tempDir, 'watch.yaml');
       await fs.writeFile(
         filePath,
-        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await loader.load(filePath);
@@ -224,7 +229,7 @@ targets:
 
       await fs.writeFile(
         filePath,
-        `name: WatchTestUpdated\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: WatchTestUpdated\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await reloadPromise;
@@ -235,7 +240,7 @@ targets:
       const filePath = path.join(tempDir, 'watch.yaml');
       await fs.writeFile(
         filePath,
-        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       loader.watch(filePath);
@@ -247,7 +252,7 @@ targets:
       const filePath = path.join(tempDir, 'watch.yaml');
       await fs.writeFile(
         filePath,
-        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: WatchTest\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       loader.watch(filePath);
@@ -260,7 +265,7 @@ targets:
       const filePath = path.join(tempDir, 'test.yaml');
       await fs.writeFile(
         filePath,
-        `name: Test\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Test\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       expect(loader.getLoadedScenarios()).toHaveLength(0);
@@ -272,7 +277,7 @@ targets:
       const filePath = path.join(tempDir, 'test.yaml');
       await fs.writeFile(
         filePath,
-        `name: Test\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`
+        `name: Test\ntargets:\n  - selector: "*"\n    faults:\n      - type: latency\n        config:\n          minDelay: 100\n          maxDelay: 200\n`,
       );
 
       await loader.load(filePath);
@@ -288,7 +293,12 @@ targets:
         targets: [
           {
             selector: '*',
-            faults: [{ type: 'latency' as const, config: { minDelay: 100, maxDelay: 200 } }],
+            faults: [
+              {
+                type: 'latency' as const,
+                config: { minDelay: 100, maxDelay: 200 },
+              },
+            ],
           },
         ],
       };
@@ -299,7 +309,9 @@ targets:
       const noValidateLoader = createScenarioLoader({ validation: false });
       const scenario = { name: 'Direct', targets: [] };
       await expect(
-        noValidateLoader.validate(scenario as unknown as import('@agent-chaos/core').Scenario)
+        noValidateLoader.validate(
+          scenario as unknown as import('@reaatech/agent-chaos-core').Scenario,
+        ),
       ).resolves.toBeUndefined();
     });
   });

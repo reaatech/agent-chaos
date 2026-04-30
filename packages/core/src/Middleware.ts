@@ -1,16 +1,16 @@
-import type {
-  ToolCall,
-  ToolResponse,
-  Scenario,
-  FaultConfig,
-  InjectionContext,
-} from './types/index.js';
 import type { ChaosEngine } from './ChaosEngine.js';
 import { DEFAULT_PROBABILITY, MAX_CALL_HISTORY } from './constants.js';
+import type {
+  FaultConfig,
+  InjectionContext,
+  Scenario,
+  ToolCall,
+  ToolResponse,
+} from './types/index.js';
 import { Logger } from './utils/Logger.js';
-import { matchSelector } from './utils/selector.js';
-import { TemporalScheduler } from './utils/TemporalScheduler.js';
 import { MathRandom, type RandomSource } from './utils/RandomSource.js';
+import { TemporalScheduler } from './utils/TemporalScheduler.js';
+import { matchSelector } from './utils/selector.js';
 
 export interface MiddlewareConfig {
   timeout?: number;
@@ -77,7 +77,9 @@ export class Middleware {
         const { fault: selectedFault, scenario: selectedScenario } = selected;
         const injector = this.engine.injectors.get(selectedFault.type);
         if (!injector) {
-          this.logger.warn('No injector found for fault type', { type: selectedFault.type });
+          this.logger.warn('No injector found for fault type', {
+            type: selectedFault.type,
+          });
           return this.passthrough(call, startTime);
         }
 
