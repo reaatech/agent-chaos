@@ -127,7 +127,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Type check
-        run: pnpm type-check
+        run: pnpm typecheck
 
   build:
     name: Build
