@@ -9,8 +9,8 @@ import type {
 } from './types/index.js';
 import { Logger } from './utils/Logger.js';
 import { MathRandom, type RandomSource } from './utils/RandomSource.js';
-import { TemporalScheduler } from './utils/TemporalScheduler.js';
 import { matchSelector } from './utils/selector.js';
+import { TemporalScheduler } from './utils/TemporalScheduler.js';
 
 export interface MiddlewareConfig {
   timeout?: number;

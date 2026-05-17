@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { ContradictionInjector } from './ContradictionInjector.js';
+import { createStandardInjectors } from './index.js';
 import { LatencyInjector } from './LatencyInjector.js';
 import { MalformedOutputInjector } from './MalformedOutputInjector.js';
 import { PartialFailureInjector } from './PartialFailureInjector.js';
@@ -8,8 +9,6 @@ import { RateLimitInjector } from './RateLimitInjector.js';
 import { StaleContextInjector } from './StaleContextInjector.js';
 import { TimeoutInjector } from './TimeoutInjector.js';
 import { TokenLimitInjector } from './TokenLimitInjector.js';
-
-import { createStandardInjectors } from './index.js';
 
 describe('createStandardInjectors', () => {
   it('returns 8 injectors', () => {

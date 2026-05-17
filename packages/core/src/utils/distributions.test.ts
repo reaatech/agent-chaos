@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
-
-import { SeededRandom } from './RandomSource.js';
 import { burst, exponential, normal, sampleDistribution, uniform } from './distributions.js';
+import { SeededRandom } from './RandomSource.js';
 
 describe('distributions', () => {
   describe('uniform', () => {

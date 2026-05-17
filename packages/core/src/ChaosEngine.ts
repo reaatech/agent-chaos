@@ -1,6 +1,6 @@
-import { Middleware } from './Middleware.js';
 import { DEFAULT_MIDDLEWARE_TIMEOUT } from './constants.js';
 import { createStandardInjectors } from './injectors/index.js';
+import { Middleware } from './Middleware.js';
 import type {
   ChaosEngineConfig,
   ChaosEvent,

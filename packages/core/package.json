@@ -39,7 +39,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "pnpm build",
     "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --clean",
