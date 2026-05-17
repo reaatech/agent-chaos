@@ -47,7 +47,7 @@
     "@reaatech/agent-chaos-core": "workspace:*",
     "ajv": "^8.20.0",
     "ajv-formats": "^2.1.1",
-    "yaml": "^2.3.4"
+    "yaml": "^2.8.4"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
