@@ -5,11 +5,11 @@ import * as path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
+  createScenarioLoader,
   ScenarioLoadError,
   type ScenarioLoader,
   ScenarioParseError,
   ScenarioValidationError,
-  createScenarioLoader,
 } from './ScenarioLoader.js';
 
 describe('ScenarioLoader', () => {

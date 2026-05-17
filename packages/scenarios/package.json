@@ -13,7 +13,14 @@
   "bugs": {
     "url": "https://github.com/reaatech/agent-chaos/issues"
   },
-  "keywords": ["chaos", "chaos-engineering", "fault-injection", "scenarios", "yaml", "agent"],
+  "keywords": [
+    "chaos",
+    "chaos-engineering",
+    "fault-injection",
+    "scenarios",
+    "yaml",
+    "agent"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -33,7 +40,9 @@
     "./package.json": "./package.json",
     "./templates/*": "./src/templates/*"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "pnpm build",
     "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --shims --clean && node -e \"require('fs').cpSync('src/schemas', 'dist/schemas', {recursive:true})\"",

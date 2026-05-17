@@ -3,8 +3,8 @@ import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { Scenario } from '@reaatech/agent-chaos-core';
-import { Ajv } from 'ajv';
 import type { ErrorObject } from 'ajv';
+import { Ajv } from 'ajv';
 import addFormats from 'ajv-formats';
 import YAML from 'yaml';
 

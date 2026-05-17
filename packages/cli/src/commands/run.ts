@@ -6,9 +6,7 @@ import chalk from 'chalk';
 
 const DEFAULT_SAMPLE_CALLS = 10;
 
-function collectToolNames(scenario: {
-  targets?: Array<{ selector: string }>;
-}): string[] {
+function collectToolNames(scenario: { targets?: Array<{ selector: string }> }): string[] {
   const toolNames = new Set<string>();
   const targets = scenario.targets ?? [];
   for (const target of targets) {

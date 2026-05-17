@@ -13,7 +13,13 @@
   "bugs": {
     "url": "https://github.com/reaatech/agent-chaos/issues"
   },
-  "keywords": ["chaos", "chaos-engineering", "fault-injection", "cli", "agent"],
+  "keywords": [
+    "chaos",
+    "chaos-engineering",
+    "fault-injection",
+    "cli",
+    "agent"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
@@ -32,7 +38,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepublishOnly": "pnpm build",
     "build": "tsup src/index.ts --format esm --dts --sourcemap --clean",

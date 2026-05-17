@@ -1,7 +1,7 @@
 import type { LatencyConfig } from '../types/faults.js';
 import type { FaultConfig, InjectionContext, InjectionResult, Injector } from '../types/index.js';
-import { Logger } from '../utils/Logger.js';
 import { type DistributionType, sampleDistribution } from '../utils/distributions.js';
+import { Logger } from '../utils/Logger.js';
 
 export type { LatencyConfig };
 
