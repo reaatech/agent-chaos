@@ -16,7 +16,6 @@ updates:
     labels:
       - 'dependencies'
     versioning-strategy: increase
-    package-manager: pnpm@10.22.0
     open-pull-requests-limit: 10
 
   - package-ecosystem: 'github-actions'
