@@ -54,7 +54,7 @@
     "@reaatech/agent-chaos-core": "workspace:*",
     "@reaatech/agent-chaos-scenarios": "workspace:*",
     "commander": "^15.0.0",
-    "chalk": "^5.3.0"
+    "chalk": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^26.0.1",
